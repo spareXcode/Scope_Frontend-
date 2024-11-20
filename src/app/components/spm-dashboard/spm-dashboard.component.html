@@ -1,0 +1,46 @@
+<app-top-nav-bar></app-top-nav-bar>
+<div class="flex flex-col h-screen">
+    <div class="h-12 w-full bg-[#5ca2a6] flex items-center p-5 justify-between">
+        <div class="rounded w-64 flex flex-row justify-between items-center">
+            <select name="" id="" class="w-32 h-8 rounded">
+                <option value="" disabled selected hidden>Select Location</option>
+            </select>
+            <select name="" id="" class="w-28 h-8 rounded flex items-center justify-center">
+                <option value="" disabled selected hidden>Time Band</option>
+            </select>
+        </div>
+        <div class="flex items-center justify-between gap-4 ">
+            <div class="flex ">
+                <p class="text-white">Stock Updated On:</p>
+                <div class="bg-white h-6 w-20 rounded-sm ml-3"></div>
+            </div>
+            <i class="pi pi-bell text-3xl text-white hover:text-black"></i>
+            <i class="pi pi-user text-3xl text-white hover:text-black"></i>
+            
+        </div>
+    
+    </div>
+    
+    <div class="w-full h-full relative flex flex-row">
+        <app-side-menue class="z-10"></app-side-menue>
+      
+        <!-- Background Image -->
+        <img 
+          src='Background_image.png' 
+          alt="Background" 
+          class="absolute inset-0 w-full h-full object-cover z-0"
+        />
+      
+        <!-- Cards Container -->
+        <div class="h-full w-full flex items-center justify-center gap-4 z-10">
+          <div class="grid grid-cols-2 gap-8">
+            <!-- Cards -->
+            <app-order-request-status-card class="bg-[#ffe786] rounded-lg" text="'Parts not in master' Pending"></app-order-request-status-card>
+            <app-order-request-status-card class="bg-[#efeff8] rounded-lg" text="No. of Request Pending"></app-order-request-status-card>
+            <app-order-request-status-card class="bg-[#63f4ad] rounded-lg" text="No. of Requests Approved"></app-order-request-status-card>
+            <app-order-request-status-card class="bg-[#ff9d9d] rounded-lg" text="No. of Request Rejected"></app-order-request-status-card>
+          </div>
+        </div>
+      </div>
+      
+</div>
