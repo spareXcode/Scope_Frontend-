@@ -2,15 +2,19 @@
 <app-top-nav-bar></app-top-nav-bar>
 <div class="flex flex-col h-screen">
     <div class="h-12 w-full bg-[#5ca2a6] flex items-center p-5 justify-between">
-        <div class="rounded w-64 flex flex-row justify-between items-center">
-            <select name="" id="" class="w-32 h-8 rounded">
-                <option value="" disabled selected hidden>Select Location</option>
+        <div class="rounded w-64 flex flex-row justify-between items-center" [formGroup]="spmDashBoardInputData" (change)="onSelectionChange()">
+            <select name="" id="" class="w-32 h-8 rounded" formControlName="locationID">
+                <option value="" disabled hidden>Select Location</option>
                 @for (item of locationData; track $index) {
                   <option [value]="item.LocationID">{{item.Location}}</option>
                 }
             </select>
-            <select name="" id="" class="w-28 h-8 rounded flex items-center justify-center">
+            <select name="" id="" class="w-28 h-8 rounded flex items-center justify-center" formControlName="Timeband" (change)="onSelectionChange()">
                 <option value="" disabled selected hidden>Time Band</option>
+                <option value="today">Today</option>
+                <option value="yesterday">Yesterday</option>
+                <option value="lastweek">Last Week</option>
+                <option value="last30Days">Last 30 Days</option>
             </select>
         </div>
         <div class="flex items-center justify-between gap-4 ">
@@ -38,10 +42,10 @@
         <div class="h-full w-full flex items-center justify-center gap-4 z-10">
           <div class="grid lg:grid-cols-2 gap-8 grid-cols-1">
             <!-- Cards -->
-            <app-order-request-status-card class="bg-[#ffe786] rounded-lg" text="'Parts not in master' Pending"></app-order-request-status-card>
-            <app-order-request-status-card class="bg-[#efeff8] rounded-lg" text="No. of Request Pending"></app-order-request-status-card>
-            <app-order-request-status-card class="bg-[#63f4ad] rounded-lg" text="No. of Requests Approved"></app-order-request-status-card>
-            <app-order-request-status-card class="bg-[#ff9d9d] rounded-lg" text="No. of Request Rejected"></app-order-request-status-card>
+            <app-order-request-status-card [values]="sumOfNotInMaster" class="bg-[#ffe786] rounded-lg" text="'Parts not in master' Pending"></app-order-request-status-card>
+            <app-order-request-status-card [values]="sumOfPendingRequest" class="bg-[#efeff8] rounded-lg" text="No. of Request Pending"></app-order-request-status-card>
+            <app-order-request-status-card [values]="sumofApprovedRequest" class="bg-[#63f4ad] rounded-lg" text="No. of Requests Approved"></app-order-request-status-card>
+            <app-order-request-status-card [values]="sumofRejectedRequest" class="bg-[#ff9d9d] rounded-lg" text="No. of Request Rejected"></app-order-request-status-card>
           </div>
         </div>
       </div>

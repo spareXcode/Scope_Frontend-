@@ -15,6 +15,8 @@ export class OrderRequestStatusCardComponent {
 
 
  @Input() text:string = ""
+ @Input() values: number = 0
+
  dashboardData: any = []
  private dealer_id = 20115
 

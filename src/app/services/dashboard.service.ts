@@ -12,7 +12,25 @@ export class DashboardService {
 
   private apiUrl = "http://localhost:8093/api/"
 
-  getDashboardData(data:any):Observable<any>{
-    return this.http.get(`${this.apiUrl}dashboard/part-not-in-master`,{params: data})
+  getPartNotInData(data:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}dashboard/part-not-in-master`, data)
   }
+  
+  getPendingRequestData(data:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}dashboard/pending-request`,data)
+  }
+  
+
+  getApprovedRequestData(data:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}dashboard/approved-request`,data)
+  }
+
+  getRejectedRequestData(data:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}dashboard/rejected-request`,data)
+  }
+
+  getStockUpoadDatedata(data:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}dashboard/stock-uploaded-date`,data)
+  }
+
 }
