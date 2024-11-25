@@ -6,13 +6,14 @@ import { OrderRequestStatusCardComponent } from '../order-request-status-card/or
 import { TopNavBarComponent } from '../top-nav-bar/top-nav-bar.component';
 import { LocationService } from '../../services/location.service';
 import { DashboardService } from '../../services/dashboard.service';
+import { MainNavbarComponent } from '../main-navbar/main-navbar.component';
 
 
 
 @Component({
   selector: 'app-spm-dashboard',
   standalone: true,
-  imports: [SideMenueComponent,CalendarModule,FormsModule,OrderRequestStatusCardComponent,TopNavBarComponent],
+  imports: [SideMenueComponent,CalendarModule,FormsModule,OrderRequestStatusCardComponent,TopNavBarComponent,MainNavbarComponent],
   templateUrl: './spm-dashboard.component.html',
   styleUrl: './spm-dashboard.component.css'
 })

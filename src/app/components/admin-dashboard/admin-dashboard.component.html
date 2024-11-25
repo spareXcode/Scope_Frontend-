@@ -3,22 +3,22 @@
 <div class="flex flex-col h-screen">
     <div class="h-12 w-full bg-[#5ca2a6] flex items-center p-5 justify-between">
         <div class="rounded w-auto flex flex-row justify-between items-center gap-5">
-            <select name="" id="" class="w-32 h-8 rounded flex items-center justify-center">
+            <select name="" id="" class="w-20 lg:w-32 h-8 rounded flex items-center justify-center">
                 <option value="" disabled selected hidden>Brand</option>
             </select>
-            <select name="" id="" class="w-32 h-8 rounded flex items-center justify-center">
+            <select name="" id="" class="w-20 lg:w-32 h-8 rounded flex items-center justify-center">
                 <option value="" disabled selected hidden>Dealer</option>
             </select>
-            <select name="" id="" class="w-32 h-8 rounded">
+            <select name="" id="" class="w-24 lg:w-32 h-8 rounded">
                 <option value="" disabled selected hidden>Select Location</option>
             </select>
-            <select name="" id="" class="w-32 h-8 rounded flex items-center justify-center">
+            <select name="" id="" class="w-24 lg:w-32 h-8 rounded flex items-center justify-center">
                 <option value="" disabled selected hidden>Type Of Order</option>
             </select>
-            <select name="" id="" class="w-32 h-8 rounded flex items-center justify-center">
+            <select name="" id="" class="w-20 lg:w-32 h-8 rounded flex items-center justify-center">
                 <option value="" disabled selected hidden>Approved By</option>
             </select>
-            <select name="" id="" class="w-32 h-8 rounded flex items-center justify-center">
+            <select name="" id="" class="w-24 lg:w-32 h-8 rounded flex items-center justify-center">
                 <option value="" disabled selected hidden>Time Band</option>
             </select>
         </div>
@@ -43,7 +43,7 @@
       
         <!-- Cards Container -->
         <div class="h-full w-full flex items-center justify-center gap-4 z-10">
-          <div class="grid grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Cards -->
             <app-order-request-status-card class="bg-[#ffe786] rounded-lg" text="'Parts not in master' Pending"></app-order-request-status-card>
             <app-order-request-status-card class="bg-[#efeff8] rounded-lg" text="No. of Request Pending"></app-order-request-status-card>

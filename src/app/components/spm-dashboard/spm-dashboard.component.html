@@ -1,3 +1,4 @@
+<app-main-navbar></app-main-navbar>
 <app-top-nav-bar></app-top-nav-bar>
 <div class="flex flex-col h-screen">
     <div class="h-12 w-full bg-[#5ca2a6] flex items-center p-5 justify-between">
@@ -17,8 +18,7 @@
                 <p class="text-white">Stock Updated On:</p>
                 <div class="bg-white h-6 w-20 rounded-sm ml-3"></div>
             </div>
-            <i class="pi pi-bell text-3xl text-white hover:text-black"></i>
-            <i class="pi pi-user text-3xl text-white hover:text-black"></i>
+            
             
         </div>
     
@@ -36,7 +36,7 @@
       
         <!-- Cards Container -->
         <div class="h-full w-full flex items-center justify-center gap-4 z-10">
-          <div class="grid grid-cols-2 gap-8">
+          <div class="grid lg:grid-cols-2 gap-8 grid-cols-1">
             <!-- Cards -->
             <app-order-request-status-card class="bg-[#ffe786] rounded-lg" text="'Parts not in master' Pending"></app-order-request-status-card>
             <app-order-request-status-card class="bg-[#efeff8] rounded-lg" text="No. of Request Pending"></app-order-request-status-card>
