@@ -4,6 +4,9 @@
         <div class="rounded w-64 flex flex-row justify-between items-center">
             <select name="" id="" class="w-32 h-8 rounded">
                 <option value="" disabled selected hidden>Select Location</option>
+                @for (item of locationData; track $index) {
+                  <option [value]="item.LocationID">{{item.Location}}</option>
+                }
             </select>
             <select name="" id="" class="w-28 h-8 rounded flex items-center justify-center">
                 <option value="" disabled selected hidden>Time Band</option>
