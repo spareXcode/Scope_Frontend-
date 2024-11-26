@@ -1,9 +1,15 @@
+<div class="relative">
+  <!-- Loader -->
+  <div *ngIf="isLoading" class="absolute inset-0 bg-white bg-opacity-70 z-50 flex items-center justify-center">
+    <p-progressSpinner ariaLabel="loading" />
+  </div>
+
 <app-main-navbar></app-main-navbar>
 <app-top-nav-bar></app-top-nav-bar>
 <div class="flex flex-col h-screen">
-    <div class="h-12 w-full bg-[#5ca2a6] flex items-center p-5 justify-between">
-        <div class="rounded w-64 flex flex-row justify-between items-center" [formGroup]="spmDashBoardInputData" (change)="onSelectionChange()">
-            <select name="" id="" class="w-32 h-8 rounded" formControlName="locationID">
+    <div class="h-12 w-full bg-[#5ca2a6] flex items-center p-5 justify-between" [formGroup]="spmDashBoardInputData">
+        <div class="rounded w-64 flex flex-row justify-between items-center" >
+            <select name="" id="" class="w-32 h-8 rounded" formControlName="locationID" (change)="onSelectionChange()">
                 <option value="" disabled hidden>Select Location</option>
                 @for (item of locationData; track $index) {
                   <option [value]="item.LocationID">{{item.Location}}</option>
@@ -20,10 +26,10 @@
         <div class="flex items-center justify-between gap-4 ">
             <div class="flex ">
                 <p class="text-white">Stock Updated On:</p>
-                <div class="bg-white h-6 w-20 rounded-sm ml-3"></div>
+                <div class="bg-white h-6 w-28 rounded-sm ml-3 px-3">{{this.spmDashBoardInputData.value.StockDate}}</div>
             </div>
             
-            
+  
         </div>
     
     </div>

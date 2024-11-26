@@ -14,7 +14,7 @@ export class LocationService {
 
   getLocationData(data:any): Observable<any>{
     
-    return this.http.get(`${this.apiUrl}utilities/locations`,{params:data})
+    return this.http.post(`${this.apiUrl}utilities/locations`,data)
   }
 
 
