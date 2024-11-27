@@ -5,28 +5,61 @@
         <div class="rounded w-auto flex flex-row justify-between items-center gap-5">
             <select name="" id="" class="w-20 lg:w-32 h-8 rounded flex items-center justify-center" formControlName="BrandID" (change)="onSelctionChangeBrand()">
                 <option value="" disabled selected hidden>Brand</option>
-                
+                @if (BrandData.length == 0) {
+                    <option value="">No Brands Available</option>
+                }
+                @else {
                     @for (brand of BrandData; track $index) {
                         <option [value]="brand.bigid">{{brand.vcbrand}}</option>
                     }
+                }
+                
+                    
             </select>
             <select name="" id="" class="w-20 lg:w-32 h-8 rounded flex items-center justify-center" formControlName="DealerID" (change)="onSelectionChangeDealer()">
                 <option value="" disabled selected hidden>Dealer</option>
-                @for (Dealer of DealerData; track $index) {
-                    <option [value]="Dealer.bigid">{{Dealer.vcName}}</option>
+                @if (DealerData.length == 0) {
+                    <option value="">No Dealer Available</option>
                 }
+                @else {
+                    @for (Dealer of DealerData; track $index) {
+                        <option [value]="Dealer.bigid">{{Dealer.vcName}}</option>
+                    }
+
+                }
+                
             </select>
             <select name="" id="" class="w-24 lg:w-32 h-8 rounded" formControlName="LocationID" (change)="onSelectionChangeApprovedBy()" >
                 <option value="" disabled selected hidden>Select Location</option>
-                @for (location of LocationData; track $index) {
-                    <option [value]="location.LocationID">{{location.Location}}</option>
+
+                @if (LocationData == 0) {
+                    <option value="">No Location Available</option>
+
                 }
+                @else {
+                    @for (location of LocationData; track $index) {
+                        <option [value]="location.LocationID">{{location.Location}}</option>
+                    }
+                }
+                
             </select>
             <select name="" id="" class="w-24 lg:w-32 h-8 rounded flex items-center justify-center" formControlName="TypeOfOrder">
                 <option value="" disabled selected hidden>Type Of Order</option>
+                <option value="urgent">Urgent</option>
+                <option value="regular">Regular</option>
             </select>
             <select name="" id="" class="w-20 lg:w-32 h-8 rounded flex items-center justify-center" formControlName="ApproveBy" >
                 <option value="" disabled selected hidden>Approved By</option>
+
+                @if (ApproveByData == 0) {
+                    <option value="">No Data</option>
+                }
+                @else {
+                    @for (approved of ApproveByData; track $index) {
+                        <option [value]="approved">{{approved}}</option>
+                    }
+                }
+               
             </select>
             <select name="" id="" class="w-24 lg:w-32 h-8 rounded flex items-center justify-center"formControlName="Timeband">
                 <option value="" disabled selected hidden>Time Band</option>
