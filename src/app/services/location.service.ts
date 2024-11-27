@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class LocationService {
 
-  private apiUrl = "http://localhost:8093/api/"
+  private apiUrl = "http://localhost:8094/api/"
 
   constructor(private http: HttpClient) { }
   

@@ -10,27 +10,35 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
 
-  private apiUrl = "http://localhost:8093/api/"
+  private apiUrl = "http://localhost:8094/api/"
 
-  getPartNotInData(data:any):Observable<any>{
-    return this.http.post(`${this.apiUrl}dashboard/part-not-in-master`, data)
-  }
+  // getPartNotInData(data:any):Observable<any>{
+  //   return this.http.post(`${this.apiUrl}dashboard/part-not-in-master`, data)
+  // }
   
-  getPendingRequestData(data:any):Observable<any>{
-    return this.http.post(`${this.apiUrl}dashboard/pending-request`,data)
-  }
+  // getPendingRequestData(data:any):Observable<any>{
+  //   return this.http.post(`${this.apiUrl}dashboard/pending-request`,data)
+  // }
   
 
-  getApprovedRequestData(data:any):Observable<any>{
-    return this.http.post(`${this.apiUrl}dashboard/approved-request`,data)
-  }
+  // getApprovedRequestData(data:any):Observable<any>{
+  //   return this.http.post(`${this.apiUrl}dashboard/approved-request`,data)
+  // }
 
-  getRejectedRequestData(data:any):Observable<any>{
-    return this.http.post(`${this.apiUrl}dashboard/rejected-request`,data)
-  }
+  // getRejectedRequestData(data:any):Observable<any>{
+  //   return this.http.post(`${this.apiUrl}dashboard/rejected-request`,data)
+  // }
 
   getStockUpoadDatedata(data:any):Observable<any>{
     return this.http.post(`${this.apiUrl}dashboard/stock-uploaded-date`,data)
   }
+
+  getSpmDashBoardData():Observable<any>{
+    return this.http.get(`${this.apiUrl}dashboard/fetch-data-all-locations`)
+  }
+
+  // getSpmDashboardData(data:any):Observable<any>{
+  //   return this.http.post( `${this.apiUrl}dashboard/fetch-data-locations`)
+  // }
 
 }

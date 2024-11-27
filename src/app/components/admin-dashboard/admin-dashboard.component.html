@@ -1,5 +1,9 @@
+<div class="relative">
+    <!-- Loader -->
+    <div *ngIf="isLoading" class="absolute inset-0 bg-white bg-opacity-70 z-50 flex items-center justify-center">
+      <p-progressSpinner ariaLabel="loading" />
+    </div>
 <app-top-nav-bar></app-top-nav-bar>
-
 <div class="flex flex-col h-screen">
     <div class="h-12 w-full bg-[#5ca2a6] flex items-center p-5 justify-between" [formGroup]="AdminDashboardInputData">
         <div class="rounded w-auto flex flex-row justify-between items-center gap-5">
@@ -29,7 +33,7 @@
                 }
                 
             </select>
-            <select name="" id="" class="w-24 lg:w-32 h-8 rounded" formControlName="LocationID" (change)="onSelectionChangeApprovedBy()" >
+            <select name="" id="" class="w-24 lg:w-32 h-8 rounded" formControlName="LocationID" (change)="onSelectionChangeLocation()">
                 <option value="" disabled selected hidden>Select Location</option>
 
                 @if (LocationData == 0) {
@@ -48,7 +52,7 @@
                 <option value="urgent">Urgent</option>
                 <option value="regular">Regular</option>
             </select>
-            <select name="" id="" class="w-20 lg:w-32 h-8 rounded flex items-center justify-center" formControlName="ApproveBy" >
+            <select name="" id="" class="w-20 lg:w-32 h-8 rounded flex items-center justify-center" formControlName="ApproveBy" (change)="onSelectionChangeApprovedBy()" >
                 <option value="" disabled selected hidden>Approved By</option>
 
                 @if (ApproveByData == 0) {
@@ -92,10 +96,10 @@
         <div class="h-full w-full flex items-center justify-center gap-4 z-10">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Cards -->
-            <app-order-request-status-card class="bg-[#ffe786] rounded-lg" text="'Parts not in master' Pending"></app-order-request-status-card>
-            <app-order-request-status-card class="bg-[#efeff8] rounded-lg" text="No. of Request Pending"></app-order-request-status-card>
-            <app-order-request-status-card class="bg-[#63f4ad] rounded-lg" text="No. of Requests Approved"></app-order-request-status-card>
-            <app-order-request-status-card class="bg-[#ff9d9d] rounded-lg" text="No. of Request Rejected"></app-order-request-status-card>
+            <app-order-request-status-card [values]="sumOfNotInMaster" class="bg-[#ffe786] rounded-lg" text="'Parts not in master' Pending"></app-order-request-status-card>
+            <app-order-request-status-card [values]="sumOfPendingRequest" class="bg-[#efeff8] rounded-lg" text="No. of Request Pending"></app-order-request-status-card>
+            <app-order-request-status-card [values]="sumofApprovedRequest" class="bg-[#63f4ad] rounded-lg" text="No. of Requests Approved"></app-order-request-status-card>
+            <app-order-request-status-card [values]="sumofRejectedRequest" class="bg-[#ff9d9d] rounded-lg" text="No. of Request Rejected"></app-order-request-status-card>
           </div>
         </div>
       </div>

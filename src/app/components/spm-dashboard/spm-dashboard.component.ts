@@ -43,10 +43,10 @@ export class SpmDashboardComponent {
   ngOnInit(): void {
     
     this.fetchLocationData()
-    this.fetchNotInmasterData()
-    this.fetchPendingRequestData()
-    this.fetchApprovedRequestData()
-    this.fetchRejectedRequestData()
+    // this.fetchNotInmasterData()
+    // this.fetchPendingRequestData()
+    // this.fetchApprovedRequestData()
+    // this.fetchRejectedRequestData()
    
     
   }
@@ -86,121 +86,121 @@ export class SpmDashboardComponent {
     
   }
 
-  fetchNotInmasterData(){
-    this.isLoading = true
-    this.Dashboardservice.getPartNotInData({dealer_id: this.dealer_id}).subscribe((res:any)=>{
-      this.notInmaster = res.data     
-      this.calculateYellowLineCount()
-      this.isLoading = false
-    })
+  // fetchNotInmasterData(){
+  //   this.isLoading = true
+  //   this.Dashboardservice.getPartNotInData({dealer_id: this.dealer_id}).subscribe((res:any)=>{
+  //     this.notInmaster = res.data     
+  //     this.calculateYellowLineCount()
+  //     this.isLoading = false
+  //   })
     
-  }
+  // }
 
-  fetchPendingRequestData(){
-    this.isLoading = true
-    this.Dashboardservice.getPendingRequestData({dealer_id: this.dealer_id}).subscribe((res:any)=>{
-      this.pendingRequest = res.data
-      console.log();
+  // fetchPendingRequestData(){
+  //   this.isLoading = true
+  //   this.Dashboardservice.getPendingRequestData({dealer_id: this.dealer_id}).subscribe((res:any)=>{
+  //     this.pendingRequest = res.data
+  //     console.log();
       
-      this.calculatePendingRequestData()
-      this.isLoading = false
-    })
-  }
+  //     this.calculatePendingRequestData()
+  //     this.isLoading = false
+  //   })
+  // }
 
-  fetchApprovedRequestData(){
-    this.isLoading = true
-    this.Dashboardservice.getApprovedRequestData({dealer_id: this.dealer_id}).subscribe((res:any)=>{
-      this.approvedRequest = res.data
-      this.calculateApprovedRequestData()
-      this.isLoading = false
-    })
-  }
+  // fetchApprovedRequestData(){
+  //   this.isLoading = true
+  //   this.Dashboardservice.getApprovedRequestData({dealer_id: this.dealer_id}).subscribe((res:any)=>{
+  //     this.approvedRequest = res.data
+  //     this.calculateApprovedRequestData()
+  //     this.isLoading = false
+  //   })
+  // }
 
-  fetchRejectedRequestData(){
-    this.isLoading = true
-    this.Dashboardservice.getRejectedRequestData({dealer_id:this.dealer_id}).subscribe((res:any)=>{
-      this.rejectedRequest = res.data
-      this.calculateRejectedRequestData()
-      this.isLoading = false
-    })
-  }
+  // fetchRejectedRequestData(){
+  //   this.isLoading = true
+  //   this.Dashboardservice.getRejectedRequestData({dealer_id:this.dealer_id}).subscribe((res:any)=>{
+  //     this.rejectedRequest = res.data
+  //     this.calculateRejectedRequestData()
+  //     this.isLoading = false
+  //   })
+  // }
 
-  fetchStockUploadData(locationId:any) {
-    this.isLoading = true
-    this.Dashboardservice.getStockUpoadDatedata({ location_id: locationId}).subscribe((res: any) => {
-      this.stockUploadedDate = res.data;
+   fetchStockUploadData(locationId:any) {
+     this.isLoading = true
+     this.Dashboardservice.getStockUpoadDatedata({ location_id: locationId}).subscribe((res: any) => {
+       this.stockUploadedDate = res.data;
   
-      // Check if the data is valid and then call calculateStockUploadDate
-      if (Array.isArray(this.stockUploadedDate) && this.stockUploadedDate.length > 0) {
-        this.calculateStockUploadDate();
-        this.isLoading = false
-      } else {
-        console.log("No valid stock upload data available.");
-        this.isLoading = false
-      }
+       // Check if the data is valid and then call calculateStockUploadDate
+       if (Array.isArray(this.stockUploadedDate) && this.stockUploadedDate.length > 0) {
+         this.calculateStockUploadDate();
+         this.isLoading = false
+       } else {
+         console.log("No valid stock upload data available.");
+         this.isLoading = false
+       }
     });
   }
   
-  calculateStockUploadDate() {
-    this.StockUploaded_Date = this.stockUploadedDate[0].StockDate;
+   calculateStockUploadDate() {
+     this.StockUploaded_Date = this.stockUploadedDate[0].StockDate;
   
-    // Safely split the date part
-    if (this.StockUploaded_Date) {
-      this.spmDashBoardInputData.value.StockDate = this.StockUploaded_Date.split('T')[0];
-      console.log("Extracted Date: ",this.spmDashBoardInputData.value.StockDate );
-    } else {
-      console.log("StockUploaded_Date is undefined or invalid.");
-    }
-  }
+     // Safely split the date part
+     if (this.StockUploaded_Date) {
+       this.spmDashBoardInputData.value.StockDate = this.StockUploaded_Date.split('T')[0];
+       console.log("Extracted Date: ",this.spmDashBoardInputData.value.StockDate );
+     } else {
+       console.log("StockUploaded_Date is undefined or invalid.");
+     }
+   }
 
-  calculateRejectedRequestData(){
+  // calculateRejectedRequestData(){
 
-    if(Array.isArray(this.rejectedRequest)){
-      this.sumofRejectedRequest = this.rejectedRequest.reduce((total:any,itemarray:any)=>{
-        return total + itemarray[0].current_status_count
-      },0)
-      console.log("sum of rejected request ", this.sumofRejectedRequest);
+  //   if(Array.isArray(this.rejectedRequest)){
+  //     this.sumofRejectedRequest = this.rejectedRequest.reduce((total:any,itemarray:any)=>{
+  //       return total + itemarray[0].current_status_count
+  //     },0)
+  //     console.log("sum of rejected request ", this.sumofRejectedRequest);
       
-    }
-  }
+  //   }
+  // }
 
 
 
-  calculateApprovedRequestData(){
+  // calculateApprovedRequestData(){
 
-    if(Array.isArray(this.approvedRequest)){
-      this.sumofApprovedRequest = this.approvedRequest.reduce((total:any,itemarray:any)=>{
-        return total + itemarray[0].current_status_count
-      },0)
-      console.log("sum ofapproved request ",this.sumofApprovedRequest );
+  //   if(Array.isArray(this.approvedRequest)){
+  //     this.sumofApprovedRequest = this.approvedRequest.reduce((total:any,itemarray:any)=>{
+  //       return total + itemarray[0].current_status_count
+  //     },0)
+  //     console.log("sum ofapproved request ",this.sumofApprovedRequest );
       
-    }
-  }
+  //   }
+  // }
 
 
 
-  calculatePendingRequestData(){
+  // calculatePendingRequestData(){
 
-    if(Array.isArray(this.pendingRequest)){
-      this.sumOfPendingRequest = this.pendingRequest.reduce((total,itemarray)=>{
-        return total + itemarray[0].current_status_count
-      },0)
-      console.log("sumof pending reuqest ",this.sumOfPendingRequest);
+  //   if(Array.isArray(this.pendingRequest)){
+  //     this.sumOfPendingRequest = this.pendingRequest.reduce((total,itemarray)=>{
+  //       return total + itemarray[0].current_status_count
+  //     },0)
+  //     console.log("sumof pending reuqest ",this.sumOfPendingRequest);
       
-    }
+  //   }
     
-  }
+  // }
 
 
-  calculateYellowLineCount(){
-   if(Array.isArray(this.notInmaster)){
-    this.sumOfNotInMaster = this.notInmaster.reduce((total,itemarray)=>{
-      return total + itemarray[0].yellow_line_count
-    },0)
-    console.log("sum of yellow line", this.sumOfNotInMaster);
+  // calculateYellowLineCount(){
+  //  if(Array.isArray(this.notInmaster)){
+  //   this.sumOfNotInMaster = this.notInmaster.reduce((total,itemarray)=>{
+  //     return total + itemarray[0].yellow_line_count
+  //   },0)
+  //   console.log("sum of yellow line", this.sumOfNotInMaster);
     
-    }
-  }
+  //   }
+  // }
 
   
 }

@@ -8,7 +8,7 @@ import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 })
 export class AdmindashboardService {
 
-  private apiUrl = "http://localhost:8093/api/"
+  private apiUrl = "http://localhost:8094/api/"
 
   constructor(private http: HttpClient) { }
 
