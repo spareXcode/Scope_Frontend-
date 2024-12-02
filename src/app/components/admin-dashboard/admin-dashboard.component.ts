@@ -39,11 +39,17 @@ export class AdminDashboardComponent {
     Timeband: new FormControl(''),
   });
   isLoading:boolean = false;
+  activeRequests: number = 0; 
   
   AdminDashboardData: any = [];
 
   onSelctionChangeBrand() {
     this.AdminDashboardInputData.get('DealerID')?.enable();
+    this.AdminDashboardInputData.get('DealerID')?.reset('')
+    this.AdminDashboardInputData.get('LocationID')?.reset('')
+    this.AdminDashboardInputData.get('TypeOfOrder')?.reset('')
+    this.AdminDashboardInputData.get('ApproveBy')?.reset('')
+    this.AdminDashboardInputData.get('Timeband')?.reset('')
     this.AdminDashboardData = this.AdminDashboardInputData.value;
     console.log("brand se data",this.AdminDashboardData)
     this.fetchDealerData(this.AdminDashboardInputData.value.BrandID);
@@ -51,6 +57,10 @@ export class AdminDashboardComponent {
     this.fetchDashBoardData(this.AdminDashboardData);
   }
   onSelectionChangeDealer() {
+    this.AdminDashboardInputData.get('LocationID')?.reset('')
+    this.AdminDashboardInputData.get('TypeOfOrder')?.reset('')
+    this.AdminDashboardInputData.get('ApproveBy')?.reset('')
+    this.AdminDashboardInputData.get('Timeband')?.reset('')
     this.AdminDashboardInputData.get('LocationID')?.enable();
     this.AdminDashboardData = this.AdminDashboardInputData.value;
     console.log("Dealer se Data",this.AdminDashboardData)
@@ -61,16 +71,34 @@ export class AdminDashboardComponent {
   }
   
   onSelectionChangeLocation(){
+    this.AdminDashboardInputData.get('TypeOfOrder')?.reset('')
+    this.AdminDashboardInputData.get('ApproveBy')?.reset('')
+    this.AdminDashboardInputData.get('Timeband')?.reset('')
     this.AdminDashboardData  = this.AdminDashboardInputData.value
     this.fetchApprovedByData(this.AdminDashboardInputData.value.LocationID);
-    console.log("Location se data",this.AdminDashboardData)
+    //console.log("Location se data",this.AdminDashboardData)
     this.fetchDashBoardData(this.AdminDashboardData);
   }
   onSelectionChangeApprovedBy() {
+    
+    this.AdminDashboardInputData.get('Timeband')?.reset('')
     this.AdminDashboardData = this.AdminDashboardInputData.value;
-     console.log("approved by Data",this.AdminDashboardData)
+     //console.log("approved by Data",this.AdminDashboardData)
     this.fetchDashBoardData(this.AdminDashboardData);
   }
+  onSelectionChangeTypeOfOrder() {
+    this.AdminDashboardInputData.get('ApproveBy')?.reset('')
+    this.AdminDashboardInputData.get('Timeband')?.reset('')
+    this.AdminDashboardData = this.AdminDashboardInputData.value;
+     //console.log("approved by Data",this.AdminDashboardData)
+    this.fetchDashBoardData(this.AdminDashboardData);
+  }
+  onSelectionChangeTimeband() {
+    this.AdminDashboardData = this.AdminDashboardInputData.value;
+    // console.log("approved by Data",this.AdminDashboardData)
+    this.fetchDashBoardData(this.AdminDashboardData);
+  }
+  
 
 
   BrandData: any = [];
@@ -81,53 +109,67 @@ export class AdminDashboardComponent {
 
   AdminDashBoardNumbers: any = [];
 
-  fetchBrandData() {
+
+  private startLoader() {
+    this.activeRequests++;
     this.isLoading = true;
+  }
+
+  // Decrement activeRequests and set isLoading false when all requests are complete
+  private stopLoader() {
+    this.activeRequests--;
+    if (this.activeRequests === 0) {
+      this.isLoading = false;
+    }
+  }
+
+  fetchBrandData() {
+    this.startLoader();
     this.adminDashBoardService.getAdminBrandData().subscribe((res: any) => {
       this.BrandData = res.data;
-      console.log('BrandData received');
-      this.isLoading = false;
+      //console.log('BrandData received');
+      this.stopLoader();
       
     });
   }
 
   fetchDealerData(brand_id: any) {
-    this.isLoading = true;
+    this.startLoader();
     this.adminDashBoardService
       .getAdminDealersData({ brand_id: brand_id })
       .subscribe((res: any) => {
         this.DealerData = res.data;
-        console.log('Dealer Data  recevied');
-        this.isLoading = false;
+        //console.log('Dealer Data  recevied');
+        this.stopLoader();
       });
   }
 
   fetchLocationData(dealer_id: any) {
-    this.isLoading = true;
+    this.startLoader();
     this.adminDashBoardService
       .getAdminLocationData({ dealer_id: dealer_id })
       .subscribe((res: any) => {
         this.LocationData = res.data;
         this.isLoading = false;
-        console.log('location Data received');
-        this.isLoading = false;
+        //console.log('location Data received');
+        this.stopLoader();
       });
   }
 
   fetchApprovedByData(location_id: any) {
-    this.isLoading = true;
+    this.startLoader();
     this.adminDashBoardService
       .getAdminApprovedByData({ location_id: location_id })
       .subscribe((res: any) => {
         this.ApproveByData = res.data;
-        console.log('ApproveBy Data received ' );
-        this.isLoading = false;
+        //console.log('ApproveBy Data received ' );
+        this.stopLoader();
       });
   }
 
   fetchDashBoardData(data: any) {
-    this.isLoading = true;
-    console.log("Dealer ID ",data.DealerID)
+    this.startLoader();
+   // console.log("Dealer ID ",data.DealerID)
     this.adminDashBoardService
       .getAdminDashboardData({
         brand_id: data?.BrandID,
@@ -138,13 +180,13 @@ export class AdminDashboardComponent {
         orderType: data?.TypeOfOrder
       })
       .subscribe((res: any) => {
-       this.sumOfNotInMaster = res.data.partNotInMasterData.yellowLineCount
-       this.sumofRejectedRequest = res.data.noOfRequestRejectedData.rejectedRequestCount
-       this.sumofApprovedRequest = res.data.noOfRequestApprovedData.approvedRequest
-       this.sumOfPendingRequest = res.data.noOfRequestPendingData.pendingRequestCount
-       this.isLoading = false;
+       this.stopLoader();
+       this.sumOfNotInMaster = res.data.partNotInMasterData?.yellowLineCount || 0
+       this.sumofRejectedRequest = res.data.noOfRequestRejectedData?.rejectedRequestCount || 0
+       this.sumofApprovedRequest = res.data.noOfRequestApprovedData?.approvedRequest || 0
+       this.sumOfPendingRequest = res.data.noOfRequestPendingData?.pendingRequestCount || 0
       });
-      console.log("dashboard  data  recevied")
+      //console.log("dashboard  data  recevied")
   }
 
 

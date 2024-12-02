@@ -5,7 +5,7 @@
     </div>
 <app-top-nav-bar></app-top-nav-bar>
 <div class="flex flex-col h-screen">
-    <div class="h-12 w-full bg-[#5ca2a6] flex items-center p-5 justify-between" [formGroup]="AdminDashboardInputData">
+    <div class="h-12 w-full bg-[#5ca2a6] flex items-center p-5 justify-between shadow-xl" [formGroup]="AdminDashboardInputData">
         <div class="rounded w-auto flex flex-row justify-between items-center gap-5">
             <select name="" id="" class="w-20 lg:w-32 h-8 rounded flex items-center justify-center" formControlName="BrandID" (change)="onSelctionChangeBrand()">
                 <option value="" disabled selected hidden>Brand</option>
@@ -14,7 +14,7 @@
                 }
                 @else {
                     @for (brand of BrandData; track $index) {
-                        <option [value]="brand.bigid">{{brand.vcbrand}}</option>
+                        <option value={{brand.bigid}}>{{brand.vcbrand}}</option>
                     }
                 }
                 
@@ -27,7 +27,7 @@
                 }
                 @else {
                     @for (Dealer of DealerData; track $index) {
-                        <option [value]="Dealer.bigid">{{Dealer.vcName}}</option>
+                        <option value={{Dealer.bigid}}>{{Dealer.vcName}}</option>
                     }
 
                 }
@@ -47,7 +47,7 @@
                 }
                 
             </select>
-            <select name="" id="" class="w-24 lg:w-32 h-8 rounded flex items-center justify-center" formControlName="TypeOfOrder">
+            <select name="" id="" class="w-24 lg:w-32 h-8 rounded flex items-center justify-center" formControlName="TypeOfOrder" (change)="onSelectionChangeTypeOfOrder()">
                 <option value="" disabled selected hidden>Type Of Order</option>
                 <option value="urgent">Urgent</option>
                 <option value="regular">Regular</option>
@@ -60,12 +60,12 @@
                 }
                 @else {
                     @for (approved of ApproveByData; track $index) {
-                        <option [value]="approved">{{approved}}</option>
+                        <option [value]="approved.id">{{approved.userName}}</option>
                     }
                 }
                
             </select>
-            <select name="" id="" class="w-24 lg:w-32 h-8 rounded flex items-center justify-center"formControlName="Timeband">
+            <select name="" id="" class="w-24 lg:w-32 h-8 rounded flex items-center justify-center"formControlName="Timeband"(change)="onSelectionChangeTimeband()">
                 <option value="" disabled selected hidden>Time Band</option>
                 <option value="today">Today</option>
                 <option value="yesterday">Yesterday</option>

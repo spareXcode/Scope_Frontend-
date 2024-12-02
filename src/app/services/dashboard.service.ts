@@ -33,12 +33,12 @@ export class DashboardService {
     return this.http.post(`${this.apiUrl}dashboard/stock-uploaded-date`,data)
   }
 
-  getSpmDashBoardData():Observable<any>{
-    return this.http.get(`${this.apiUrl}dashboard/fetch-data-all-locations`)
+  getSpmDashBoardAllLocationData(data:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}dashboard/fetch-data-all-locations`,data)
   }
 
-  // getSpmDashboardData(data:any):Observable<any>{
-  //   return this.http.post( `${this.apiUrl}dashboard/fetch-data-locations`)
-  // }
+  getSpmDashboardSingleLocationData(data:any):Observable<any>{
+    return this.http.post( `${this.apiUrl}dashboard/fetch-data-locations`,data)
+  }
 
 }
